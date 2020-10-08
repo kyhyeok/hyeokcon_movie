@@ -10,8 +10,8 @@ export default class extends React.Component {
     } = props;
     this.state = {
       result: null,
-      error: null,
       loading: true,
+      error: null,
       isMovie: pathname.includes("/movie/")
     };
   }
@@ -42,7 +42,7 @@ export default class extends React.Component {
     }
   }
   render() {
-    const { result, error, loading } = this.state;
+    const { result, loading, error } = this.state;
     console.log(result);
     return <DetailPresenter result={result} error={error} loading={loading} />;
   }

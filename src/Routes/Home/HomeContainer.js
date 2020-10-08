@@ -7,8 +7,8 @@ export default class extends React.Component {
     nowPlaying: null,
     upcoming: null,
     popular: null,
-    error: null,
-    loading: true
+    loading: true,
+    error: null
   };
 
   async componentDidMount() {
@@ -39,14 +39,14 @@ export default class extends React.Component {
   }
 
   render() {
-    const { nowPlaying, upcoming, popular, error, loading } = this.state;
+    const { nowPlaying, upcoming, popular, loading, error } = this.state;
     return (
       <HomePresenter
         nowPlaying={nowPlaying}
         upcoming={upcoming}
         popular={popular}
-        error={error}
         loading={loading}
+        error={error}
       />
     );
   }
