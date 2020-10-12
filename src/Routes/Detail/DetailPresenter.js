@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Loader from "../../Components/Loader";
+import Loader from "Components/Loader";
+import Message from "Components/Message";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
@@ -39,6 +40,32 @@ const Cover = styled.div`
   border-radius: 5px;
 `;
 
+const Data = styled.div`
+  width: 70%;
+  margin-left: 10px;
+`;
+
+const Title = styled.h4`
+  font-size: 30px;
+`;
+
+const ItemContainer = styled.div`
+  margin: 20px 0;
+`;
+
+const Item = styled.span``;
+
+const Divider = styled.span`
+  margin: 0 10px;
+`;
+
+const Overviwe = styled.p`
+  font-size: 12px;
+  opacity: 0.7;
+  line-height: 1.5;
+  width: 50%;
+`;
+
 const DetailPresenter = ({ result, loading, error }) =>
   loading ? (
     <Loader />
@@ -55,7 +82,36 @@ const DetailPresenter = ({ result, loading, error }) =>
               : require("../../assets/Neumann.gif")
           }
         />
+        <Data>
+          <Title>
+            {result?.original_title
+              ? result.original_title
+              : result.original_name}
+          </Title>
+          <ItemContainer>
+            <Item>
+              {result?.release_date
+                ? result.release_date
+                : result.first_air_date}
+            </Item>
+            <Divider>•</Divider>
+            <Item>
+              {result?.runtime ? result.runtime : result.episode_run_time} min
+            </Item>
+            <Divider>•</Divider>
+            <Item>
+              {result?.genres &&
+                result.genres.map((genre, index) =>
+                  index === result.genres.length - 1
+                    ? genre.name
+                    : `${genre.name} / `
+                )}
+            </Item>
+          </ItemContainer>
+          <Overviwe>{result?.overview && result.overview}</Overviwe>
+        </Data>
       </Content>
+      {error && <Message text={error} color="#e74c3c" />}
     </Container>
   );
 
