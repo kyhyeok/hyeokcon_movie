@@ -15,7 +15,7 @@ const Title = styled.span``;
 
 const Year = styled.span``;
 
-const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
+const Poster = ({ id, imageUrl, title, rating, dated, isMovie = false }) => (
   <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
     <Container>
       <ImageContainer>
@@ -28,7 +28,7 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
         </Rating>
       </ImageContainer>
       <Title>{title}</Title>
-      <Year>{year}</Year>
+      <Year>{dated}</Year>
     </Container>
   </Link>
 );
@@ -38,7 +38,7 @@ Poster.propTypes = {
   imageUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
   rating: PropTypes.number,
-  year: PropTypes.string,
+  dated: PropTypes.string,
   isMovie: PropTypes.bool
 };
 
