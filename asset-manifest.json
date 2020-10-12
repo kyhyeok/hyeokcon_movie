@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/hyeokcon_movie/static/js/main.a9a80c95.chunk.js",
+    "main.js.map": "/hyeokcon_movie/static/js/main.a9a80c95.chunk.js.map",
+    "runtime-main.js": "/hyeokcon_movie/static/js/runtime-main.614f73b0.js",
+    "runtime-main.js.map": "/hyeokcon_movie/static/js/runtime-main.614f73b0.js.map",
+    "static/js/2.94f9ea0e.chunk.js": "/hyeokcon_movie/static/js/2.94f9ea0e.chunk.js",
+    "static/js/2.94f9ea0e.chunk.js.map": "/hyeokcon_movie/static/js/2.94f9ea0e.chunk.js.map",
+    "index.html": "/hyeokcon_movie/index.html",
+    "precache-manifest.ae182db3ff58206acc229dd5bef82d73.js": "/hyeokcon_movie/precache-manifest.ae182db3ff58206acc229dd5bef82d73.js",
+    "service-worker.js": "/hyeokcon_movie/service-worker.js",
+    "static/js/2.94f9ea0e.chunk.js.LICENSE.txt": "/hyeokcon_movie/static/js/2.94f9ea0e.chunk.js.LICENSE.txt",
+    "static/media/Neumann.gif": "/hyeokcon_movie/static/media/Neumann.5da228dd.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.614f73b0.js",
+    "static/js/2.94f9ea0e.chunk.js",
+    "static/js/main.a9a80c95.chunk.js"
+  ]
+}
