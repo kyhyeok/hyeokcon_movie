@@ -1,7 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { exact } from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
+import Youtube from "react-youtube";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
 
@@ -44,6 +45,7 @@ const Cover = styled.div`
 const Data = styled.div`
   width: 70%;
   margin-left: 10px;
+  position: relative;
 `;
 
 const Title = styled.h4`
@@ -67,7 +69,21 @@ const Overviwe = styled.p`
   width: 50%;
 `;
 
-const DetailPresenter = ({ result, loading, error }) => (
+const TrailerContainer = styled.div`
+  position: absolute;
+  bottom: 5px;
+`;
+
+const Trailer = styled.div`
+  display: flex;
+`;
+
+const opts = {
+  height: "200",
+  width: "100%"
+};
+
+const DetailPresenter = ({ result, videos, loading, error }) => (
   <>
     <Helmet>
       <title>Loading | Hyeokcon-Movie</title>
@@ -103,16 +119,19 @@ const DetailPresenter = ({ result, loading, error }) => (
             </Title>
             <ItemContainer>
               <Item>
+                created_at :{" "}
                 {result?.release_date
                   ? result.release_date
                   : result.first_air_date}
               </Item>
               <Divider>•</Divider>
               <Item>
+                runingTime :{" "}
                 {result?.runtime ? result.runtime : result.episode_run_time} min
               </Item>
               <Divider>•</Divider>
               <Item>
+                genres :{" "}
                 {result?.genres &&
                   result.genres.map((genre, index) =>
                     index === result.genres.length - 1
@@ -120,6 +139,32 @@ const DetailPresenter = ({ result, loading, error }) => (
                       : `${genre.name} / `
                   )}
               </Item>
+              <Divider>•</Divider>
+              <Item>
+                language :{" "}
+                {result?.original_language && result.original_language}
+              </Item>
+              <Divider>•</Divider>
+              <Item>
+                <a
+                  href={
+                    result?.imdb_id
+                      ? `https://www.imdb.com/title/${result.imdb_id}`
+                      : "/"
+                  }
+                  target="blank"
+                >
+                  IMDB
+                </a>
+              </Item>
+              <TrailerContainer>
+                <Trailer>
+                  {videos?.results &&
+                    videos?.results.map((result) => (
+                      <Youtube videoId={result.key} opts={opts} />
+                    ))}{" "}
+                </Trailer>
+              </TrailerContainer>
             </ItemContainer>
             <Overviwe>{result?.overview && result.overview}</Overviwe>
           </Data>

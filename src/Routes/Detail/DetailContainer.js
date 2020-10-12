@@ -10,6 +10,7 @@ export default class extends React.Component {
     } = props;
     this.state = {
       result: null,
+      results: null,
       loading: true,
       error: null,
       isMovie: pathname.includes("/movie/")
@@ -29,21 +30,32 @@ export default class extends React.Component {
       return push("/");
     }
     let result = null;
+    let results = null;
+
     try {
       if (isMovie) {
         ({ data: result } = await movieApi.movieDetail(parsedId));
+        ({ data: results } = await movieApi.movieVideos(parsedId));
       } else {
         ({ data: result } = await tvApi.showDetail(parsedId));
+        ({ data: results } = await tvApi.showVideos(parsedId));
       }
       throw Error();
     } catch {
       this.setState({ error: "Can't find anything." });
     } finally {
-      this.setState({ loading: false, result });
+      this.setState({ loading: false, result, results });
     }
   }
   render() {
-    const { result, loading, error } = this.state;
-    return <DetailPresenter result={result} error={error} loading={loading} />;
+    const { result, results, loading, error } = this.state;
+    return (
+      <DetailPresenter
+        result={result}
+        videos={results}
+        error={error}
+        loading={loading}
+      />
+    );
   }
 }
