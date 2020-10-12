@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Loader from "Components/Loader";
 import Message from "Components/Message";
 
@@ -66,54 +67,69 @@ const Overviwe = styled.p`
   width: 50%;
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
-  loading ? (
-    <Loader />
-  ) : (
-    <Container>
-      <Backdrop
-        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
-      />
-      <Content>
-        <Cover
-          bgImage={
-            result?.poster_path
-              ? `https://image.tmdb.org/t/p/original${result.poster_path}`
-              : require("../../assets/Neumann.gif")
-          }
-        />
-        <Data>
-          <Title>
+const DetailPresenter = ({ result, loading, error }) => (
+  <>
+    <Helmet>
+      <title>Loading | Hyeokcon-Movie</title>
+    </Helmet>
+    {loading ? (
+      <Loader />
+    ) : error ? (
+      <Container>
+        <Helmet>
+          <title>
             {result?.original_title
               ? result.original_title
-              : result.original_name}
-          </Title>
-          <ItemContainer>
-            <Item>
-              {result?.release_date
-                ? result.release_date
-                : result.first_air_date}
-            </Item>
-            <Divider>•</Divider>
-            <Item>
-              {result?.runtime ? result.runtime : result.episode_run_time} min
-            </Item>
-            <Divider>•</Divider>
-            <Item>
-              {result?.genres &&
-                result.genres.map((genre, index) =>
-                  index === result.genres.length - 1
-                    ? genre.name
-                    : `${genre.name} / `
-                )}
-            </Item>
-          </ItemContainer>
-          <Overviwe>{result?.overview && result.overview}</Overviwe>
-        </Data>
-      </Content>
-      {error && <Message text={error} color="#e74c3c" />}
-    </Container>
-  );
+              : result.original_name}{" "}
+            | Hyeokcon-Movie
+          </title>
+        </Helmet>
+        <Backdrop
+          bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
+        />
+        <Content>
+          <Cover
+            bgImage={
+              result?.poster_path
+                ? `https://image.tmdb.org/t/p/original${result.poster_path}`
+                : require("../../assets/Neumann.gif")
+            }
+          />
+          <Data>
+            <Title>
+              {result?.original_title
+                ? result.original_title
+                : result.original_name}
+            </Title>
+            <ItemContainer>
+              <Item>
+                {result?.release_date
+                  ? result.release_date
+                  : result.first_air_date}
+              </Item>
+              <Divider>•</Divider>
+              <Item>
+                {result?.runtime ? result.runtime : result.episode_run_time} min
+              </Item>
+              <Divider>•</Divider>
+              <Item>
+                {result?.genres &&
+                  result.genres.map((genre, index) =>
+                    index === result.genres.length - 1
+                      ? genre.name
+                      : `${genre.name} / `
+                  )}
+              </Item>
+            </ItemContainer>
+            <Overviwe>{result?.overview && result.overview}</Overviwe>
+          </Data>
+        </Content>
+      </Container>
+    ) : (
+      <Message text={error} color="#e74c3c" />
+    )}
+  </>
+);
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,
