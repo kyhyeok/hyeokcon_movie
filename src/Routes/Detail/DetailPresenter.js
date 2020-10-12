@@ -150,7 +150,7 @@ const DetailPresenter = ({ result, videos, loading, error }) => (
                   href={
                     result?.imdb_id
                       ? `https://www.imdb.com/title/${result.imdb_id}`
-                      : "/"
+                      : "https://kyhyeok.github.io/hyeokcon_movie"
                   }
                   target="blank"
                 >
